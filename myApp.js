@@ -132,14 +132,27 @@ const findEditThenSave = (personId, done) => {
   })
 };
 
+// ドキュメント検索・更新・保存
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {new: true}, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, data);
+    }
+  })
 };
 
+// 自動追加される属性(_id)からドキュメント削除
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, data);
+    }
+  })
 };
 
 const removeManyPeople = (done) => {
