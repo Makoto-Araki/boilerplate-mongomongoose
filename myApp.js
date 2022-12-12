@@ -101,14 +101,35 @@ const findOneByFood = (food, done) => {
   })
 };
 
+// 自動追加される属性(_id)からドキュメント検索
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, data);
+    }
+  })
 };
 
+// ドキュメント検索・更新・保存
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, person) => {
+    if (err) {
+      console.error(err);
+      return;
+    } else {
+      person.favoriteFoods.push(foodToAdd);
+      person.save((err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          done(null, data);
+        }
+      });
+    }
+  })
 };
 
 const findAndUpdate = (personName, done) => {
