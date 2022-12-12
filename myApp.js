@@ -28,6 +28,15 @@ let Makoto = new PersonModel({
   favoriteFoods: ['Pizza', 'Pasta'],
 });
 
+// ドキュメント保存
+Makoto.save((err, data) => {
+  if (err) {
+    console.error(err);
+  } else {
+    done(null, data);
+  }
+});
+
  *******************************************************/
 
 // スキーマ定義
@@ -81,8 +90,15 @@ const findPeopleByName = (personName, done) => {
   })
 };
 
+// モデル属性(favoriteFoods)からドキュメント検索
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  Person.findOne({favoriteFoods: food}, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, data);
+    }
+  })
 };
 
 const findPersonById = (personId, done) => {
