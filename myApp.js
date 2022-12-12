@@ -16,6 +16,20 @@ mongoose.connect(myURI, { useNewUrlParser: true, useUnifiedTopology: true })
   console.error('Database connection failed')
 })
 
+/*******************************************************
+
+// モデルをインポート
+let PersonModel = require('./model/person');
+
+// インスタンス作成
+let Makoto = new PersonModel({
+  name: 'Makoto',
+  age: 67,
+  favoriteFoods: ['Pizza', 'Pasta'],
+});
+
+ *******************************************************/
+
 // スキーマ定義
 let personSchema = new mongoose.Schema({
   name: {
