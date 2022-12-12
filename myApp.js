@@ -56,8 +56,15 @@ const createManyPeople = (arrayOfPeople, done) => {
   })
 };
 
+// モデル属性(name)からドキュメント検索
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName}, (err, data) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, data);
+    }
+  })
 };
 
 const findOneByFood = (food, done) => {
