@@ -1,5 +1,6 @@
 let mongoose = require('mongoose');
 
+// スキーマ定義
 let personSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -9,4 +10,5 @@ let personSchema = new mongoose.Schema({
   favoriteFoods: [String],
 });
 
+// スキーマをモデルとしてエクスポート
 module.exports = mongoose.model('Person', personSchema)

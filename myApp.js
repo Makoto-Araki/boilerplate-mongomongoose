@@ -155,16 +155,32 @@ const removeById = (personId, done) => {
   })
 };
 
+// 条件に合致する全ドキュメント削除
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({name: nameToRemove}, (err, res) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, res);
+    }
+  });
 };
 
+// 連鎖クエリー
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
-  done(null /*, data*/);
+  Person.find({favoriteFoods: foodToSearch})
+  .sort({name: 1})    // 昇順にソート
+  .limit(2)           // 表示件数
+  .select({name: 1})  // 表示指定
+  .exec((err, res) => {
+    if (err) {
+      console.error(err);
+    } else {
+      done(null, res);
+    }
+  });
 };
 
 /** **Well Done !!**
